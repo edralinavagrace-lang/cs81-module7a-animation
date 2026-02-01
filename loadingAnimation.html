@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Animation Simulator</title>
+</head>
+//Above creates a header that can be seen on the webpage.
+<body style="font-family: monospace; text-align: center; padding-top: 100px; background-color: #f4f4f4;">
+//above sets the style of text for the body.
+  <div id="loader" style="font-size: 2rem; margin-bottom: 20px;">Loading...</div>
+  <div id="status">Please wait</div>
+//Above is a log that reads "Please wait"
+  <script>
+    function runLoadingAnimation() {
+      const loader = document.getElementById("loader");
+      const status = document.getElementById("status");
+
+      const frames = ["⏳", "⌛", ".", "..", "..."];
+      let index = 0;
+      let cycleCount = 0;
+      //this starts the cycle at zero
+      const maxCycles = 10;
+//Above is the cycling of the animation, with the emojis and dots. The last line makes the cycle have a maximum amount, being 10.
+      const interval = setInterval(() => {
+        loader.textContent = frames[index % frames.length];
+        index++;
+        if (index % frames.length === 0) {
+          cycleCount++;
+        }
+        if (cycleCount >= maxCycles) {
+          clearInterval(interval);
+          loader.textContent = "✅";
+          status.textContent = "Done!";
+          //This is where the loading is done so it prompts a new message.
+        }
+      }, 500);
+    }
+
+    runLoadingAnimation();
+//this line starts the animation.
+//An additional comment, we could have a custom loading animation, such as a gif that could be unique to the webpage.
+  </script>
+
+</body>
+</html>
